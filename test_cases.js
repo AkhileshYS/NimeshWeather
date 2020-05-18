@@ -46,7 +46,7 @@ pm.test(" TEST CASE 5: weather id above 800 so its clear sky", function () {
     })
 
 });
-pm.test("TEST CSAE 4: weather id is 500 so its light rain", function () {
+pm.test("TEST CASE 4: weather id is 500 so its light rain", function () {
     var jsonData = pm.response.json();
     var listofdata = jsonData.list;
     listofdata.forEach(ele => {
