@@ -19,12 +19,47 @@ console.log(Response.list[95].main.temp);
 
 console.log(Response.city.coord);
     
-pm.test(" TEST CASE : Check temp is lt temp_min & gt temp_max", function () {
+pm.test(" TEST CASE : In 4 days, the temp is not less than temp_min and not more than temp_max", function () {
     var jsonData = pm.response.json();
     var listofdata = jsonData.list;
     listofdata.forEach(ele => {
         var temptrue = (ele.main.temp >= ele.main.temp_min && ele.main.temp <= ele.main.temp_max)
         pm.expect(temptrue).to.eql(true);
+    })
+
+});
+
+pm.test(" TEST CASE 5: weather id above 800 so its clear sky", function () {
+    var jsonData = pm.response.json();
+    var listofdata = jsonData.list;
+    listofdata.forEach(ele => {
+        var result = true; 
+        var weatherid = ele.weather[0].id;
+        if(weatherid === 800){
+            var weatherdescription = ele.weather[0].description;
+            if(weatherdescription != "clear sky")
+            {
+                result = false;
+            }
+        }
+        pm.expect(result).to.eql(true);
+    })
+
+});
+pm.test("TEST CSAE 4: weather id is 500 so its light rain", function () {
+    var jsonData = pm.response.json();
+    var listofdata = jsonData.list;
+    listofdata.forEach(ele => {
+        var result = true; 
+        var weatherid = ele.weather[0].id;
+        if(weatherid === 500){
+            var weatherdescription = ele.weather[0].description;
+            if(weatherdescription != "light rain")
+            {
+                result = false;
+            }
+        }
+        pm.expect(result).to.eql(true);
     })
 
 });
